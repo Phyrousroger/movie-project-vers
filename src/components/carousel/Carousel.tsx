@@ -8,6 +8,7 @@ import {
 import MovieCard from "../MovieCard/MovieCard";
 import { resultType } from "../../types/MovieType/movietype";
 import { useStyle } from "../../styles/UseStyles";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface CarouselProps {
   title?: string;
@@ -22,7 +23,8 @@ const CarouselComponent: React.FC<CarouselProps> = ({
   loading,
   endpoint,
 }) => {
-  const isSmallerThanTable = window.innerWidth < 768;
+  const isSmallerThanTable = useMediaQuery("(max-width:768px)");
+  const isSmallestTable=useMediaQuery("(max-width:420px)")
   const { classes } = useStyle();
 
   const hasData = data && data !== undefined && data?.length > 0;
@@ -30,7 +32,7 @@ const CarouselComponent: React.FC<CarouselProps> = ({
     return (
       <Carousel
         my={20}
-        slideSize={isSmallerThanTable ? "30%" : "20%"}
+        slideSize={isSmallestTable ? "50%":isSmallerThanTable?"33.33%": "20%"}
         slideGap={"lg"}
         loop
         align="start"
@@ -43,7 +45,7 @@ const CarouselComponent: React.FC<CarouselProps> = ({
       >
         {[1, 2, 3, 4, 5]?.map((trend) => (
           <Carousel.Slide key={trend}>
-            <Skeleton h={300} w={200} className={classes.sketon} />
+            <Skeleton h={300} w={"100%"} className={classes.sketon} />
             <Skeleton mt={20} h={20} w={"90%"} className={classes.sketon} />
             <Skeleton mt={20} h={20} w={"50%"} className={classes.sketon} />
           </Carousel.Slide>
@@ -55,16 +57,16 @@ const CarouselComponent: React.FC<CarouselProps> = ({
   if (hasData)
     return (
       <>
-        <Title fw={500} size={20}>
+        <Title fw={500} size={isSmallerThanTable?18:20}>
           {title}
         </Title>
         <Carousel
           my={20}
-          slideSize={isSmallerThanTable ? "30%" : "20%"}
-          slideGap={"lg"}
+          slideSize={isSmallestTable ? "50%":isSmallerThanTable?"33.33%": "20%"}
+          slideGap={isSmallerThanTable?"md":"lg"}
           loop
           align="start"
-          withControls={data?.length > 5 ? true : false}
+          withControls={data?.length > 5 && !isSmallerThanTable ? true : false}
           slidesToScroll={2}
           classNames={classes}
           nextControlIcon={

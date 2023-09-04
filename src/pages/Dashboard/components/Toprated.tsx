@@ -36,13 +36,13 @@ const Toprated = () => {
       }}
     >
       <Container mt={50} size={"lg"}>
-        <Flex justify={"space-between"}>
-          <Title fw={500} size={25}>
+        <Flex justify={"space-between"} align={"center"}>
+          <Title fw={500} size={isSmallerThanTable?18:20}>
             Top-Rated
           </Title>
           <SegmentedControl
             radius="xl"
-            size={isSmallerThanTable ? "sm" : "md"}
+            size={"sm"}
             data={["TV", "MOVIE"]}
             classNames={classes}
             onChange={onTabChange}

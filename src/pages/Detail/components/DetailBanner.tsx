@@ -23,6 +23,7 @@ import InfoData from "../../../components/InfoData/InfoData";
 import dayjs from "dayjs";
 import Skelton from "../../../components/Skeleton/Skeleton";
 import { useStyle } from "../../../styles/UseStyles";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface StatusType {
   crew?: CrewType[];
@@ -32,6 +33,8 @@ interface StatusType {
 const DetailBanner: FC<StatusType> = ({ crew, video }) => {
   const { classes } = useStyle();
   const { mediatype, id } = useParams();
+  const isSmallerThanTable=useMediaQuery("(max-width:768px)");
+  const isSmallestTable=useMediaQuery("(max-width:420px)");
   const { url } = useHomeStore();
   const director = crew?.filter((f) => f.job === "Director");
   const writer = crew?.filter(
@@ -60,14 +63,19 @@ const DetailBanner: FC<StatusType> = ({ crew, video }) => {
           />
           <Flex
             gap={20}
-            justify={"space-between"}
+            // justify={"space-between"}
+            w={"100%"}
             style={{
               position: "relative",
+              flexFlow:"row wrap",
               zIndex: 10,
             }}
           >
-            <Box w={"30%"}>
-              <Card w={300} h={500} p={0}>
+            <Box 
+            w={isSmallestTable?"100%":"30%"} 
+            mx={"auto"}
+            >
+              <Card  h={500} p={0}>
                 <img
                   width={"100%"}
                   height={"100%"}
@@ -76,16 +84,16 @@ const DetailBanner: FC<StatusType> = ({ crew, video }) => {
                       ? url.poster + movieDetail?.poster_path
                       : PosterFallback
                   }
-                  alt=""
+                  alt={"title"}
                 />
               </Card>
             </Box>
-            <Box w={"70%"}>
+            <Box w={isSmallestTable?"100%":"65%"}>
               <Flex direction={"column"} gap={10} pos={"relative"}>
-                <Title color="white">
+                <Title color="white" size={isSmallerThanTable?20:25}>
                   {movieDetail?.title || movieDetail?.name}
                 </Title>
-                <Text fw={700} mt={10}>
+                <Text fw={700} mt={10} size={isSmallerThanTable?18:20}>
                   {movieDetail?.tagline}
                 </Text>
                 <Flex gap={5}>
@@ -111,8 +119,8 @@ const DetailBanner: FC<StatusType> = ({ crew, video }) => {
                   </Box>
                   <PlayBtn video={video} />
                 </Flex>
-                <Title>OverView</Title>
-                <Text size={18} fw={500} color="white">
+                <Title size={isSmallerThanTable?20:25}>OverView</Title>
+                <Text size={isSmallerThanTable?16:18} fw={500} color="white">
                   {movieDetail?.overview}
                 </Text>
                 <Box mb={20}>

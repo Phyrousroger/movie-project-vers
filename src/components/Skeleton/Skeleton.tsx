@@ -1,4 +1,3 @@
-// import { useStyle } from "@/styles/UseStyles";
 import { Flex, Box, Skeleton } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { FC } from "react";
@@ -10,24 +9,28 @@ interface skeletonprops {
 
 const Skelton: FC<skeletonprops> = ({ style }) => {
   const { classes } = useStyle();
-  const isSmallerThanTable = useMediaQuery("(max-width:768px)");
+  // const isSmallerThanTable = useMediaQuery("(max-width:768px)");
+  const isSmallestTable=useMediaQuery("(max-width:420px)");
   return (
     <Flex
       style={{
-        flexFlow: "row wrap",
+        flexFlow:isSmallestTable? "row wrap":"wrap",
+        flexWrap:"wrap",
+        zIndex:30,
       }}
       w={"100%"}
       gap={20}
       justify={"start"}
+      pos={"relative"}
     >
-      <Box w={isSmallerThanTable ? "100%" : "30%"}>
+      <Box w={isSmallestTable ? "100%" : "30%"}>
         <Skeleton
           className={classes.sketon}
-          w={style ? "100%" : 300}
+          // w={style ? "100%" : "30%"}
           h={style ? 500 : 400}
         />
       </Box>
-      <Box w={isSmallerThanTable ? "100%" : "65%"}>
+      <Box w={isSmallestTable ? "100%" : "65%"}>
         <Skeleton h={30} className={classes.sketon} w="70%" radius="xl" />
         <Skeleton h={30} mt={6} className={classes.sketon} radius="xl" />
         {style && (

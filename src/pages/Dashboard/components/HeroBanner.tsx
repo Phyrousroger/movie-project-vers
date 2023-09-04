@@ -57,16 +57,18 @@ const HeroBanner = () => {
             <Title size={isSmallerThanTable ? 50 : 80} color="white">
               Welcome
             </Title>
-            <Text size={isSmallerThanTable ? 15 : 25} color="white">
+            <Text size={isSmallerThanTable ? 20 : 25} color="white">
               Millions of movies, TV shows and people to discover. Explore now.
             </Text>
           </Box>
           <form className={classes.hersectionForm} onSubmit={searchData}>
             <TextInput
               type="text"
-              size={"xl"}
+
+              size={isSmallerThanTable?"md":"xl"}
               placeholder={"Search for a movie or TV show..."}
               w={"100%"}
+              
               onChange={(e) => setQuery(e.target.value)}
               className="hero-section-form"
             />
@@ -75,7 +77,7 @@ const HeroBanner = () => {
               className="hero-section-button"
               color="dark"
               variant="outline"
-              size="xl"
+              size={isSmallerThanTable?"md":"xl"}
             >
               Search
             </Button>

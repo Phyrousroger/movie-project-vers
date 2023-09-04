@@ -6,8 +6,8 @@ import {
   Container,
   Title,
   Loader,
-  Box,
   Pagination,
+  Grid,
 } from "@mantine/core";
 import { useState } from "react";
 import { useQuery } from "react-query";
@@ -22,6 +22,7 @@ import Select, { ActionMeta, MultiValue, SingleValue } from "react-select";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import makeAnimated from "react-select/animated";
 import { colourStyles, colourStyles2 } from "../../styles/UseSelectOption";
+import { useMediaQuery } from "@mantine/hooks";
 
 const animatedComponents = makeAnimated();
 
@@ -40,6 +41,8 @@ const sortbyData = [
 
 const Explore = () => {
   const { mediatype } = useParams();
+  const isSmallerThanTable=useMediaQuery("(max-width:768px)")
+  const isSmallestTable=useMediaQuery("(max-width:420px)");
   //chage-data
   const [genre, setGenre] = useState<number[]>();
   const [page, setPage] = useState<number>(1);
@@ -94,8 +97,14 @@ const Explore = () => {
   return (
     <Layout>
       <Container size={"lg"}>
-        <Flex justify={"space-between"} my={20}>
-          <Title size={20}>
+        <Flex
+         justify={"space-between"} 
+          style={{
+            flexFlow:"row wrap"
+
+          }}
+        my={20}>
+          <Title size={20} my={20} align="center">
             {mediatype === "tv" ? "Explore TV Shows" : "Explore Movies"}
           </Title>
           <Group>
@@ -134,21 +143,14 @@ const Explore = () => {
             <Loader />
           </Flex>
         ) : (
-          <Flex
-            justify="center"
-            my={30}
-            style={{
-              flexFlow: "row wrap",
-              justifyContent: "center",
-            }}
-            w="100%"
-          >
+        
+          <Grid >
             {ExploreData?.results?.map((explore, index) => (
-              <Box key={index} w={"20%"} my={20}>
+              <Grid.Col key={index} span={isSmallestTable?6:isSmallerThanTable?4:2} my={20}>
                 <MovieCard explore={explore} mediatype={mediatype} />
-              </Box>
+              </Grid.Col>
             ))}
-          </Flex>
+            </Grid>
         )}
 
         <Flex justify="end" my={20}>

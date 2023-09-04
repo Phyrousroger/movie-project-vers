@@ -30,6 +30,7 @@ const Dashboard = () => {
   });
   const { classes } = useStyle();
   const isSmallerThanTable = useMediaQuery("(max-width:768px)");
+  const isSmallestTable=useMediaQuery("(max-width:390px)")
   const { url } = useHomeStore();
   const navigate = useNavigate();
 
@@ -44,14 +45,14 @@ const Dashboard = () => {
       <Popular />
       <Toprated />
       <Container my={20} size={"lg"}>
-        <Title fw={500} size={25}>
+        <Title fw={500} size={isSmallerThanTable?18:20}>
           Cast List
         </Title>
 
         <Carousel
           my={20}
-          slideSize={isSmallerThanTable ? "33.33%" : "20%"}
-          slideGap={isSmallerThanTable ? 10 : 20}
+          slideSize={isSmallestTable ? "50%":isSmallerThanTable?"33.33%": "20%"}
+          slideGap={isSmallerThanTable ? "md":"lg"}
           loop
           align="start"
           classNames={classes}
@@ -72,16 +73,16 @@ const Dashboard = () => {
               return (
                 <Carousel.Slide key={trend.id}>
                   <Card
-                    h={isSmallerThanTable ? 200 : 280}
+                    h={isSmallerThanTable ? 250 : 280}
                     w={"100%"}
                     p={0}
                     color="red"
                     style={{ cursor: "pointer", position: "relative" }}
                     onClick={() => navigate(`/cast/${trend.id}`)}
                   >
-                    <img width={"100%"} height={"100%"} src={postUrl} alt="" />
+                    <img width={"100%"} height={"100%"} src={postUrl} alt="cast-image" />
                   </Card>
-                  <Text fw={700} size={18}>
+                  <Text fw={700} size={isSmallerThanTable?14:18}>
                     {trend.name}
                     ...
                   </Text>

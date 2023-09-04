@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import { useQuery } from "react-query";
 import { configuretype } from "./types/Configure/configuration";
-import { Text } from "@mantine/core";
+import { Flex, Loader, Text } from "@mantine/core";
 import useHomeStore from "./store/movieslice";
 import fetchDataFromApi from "./api";
 import Detail from "./pages/Detail/Detail";
@@ -29,7 +29,9 @@ export default function App() {
   });
 
   if (isFetching) {
-    return <Text>Loading...</Text>;
+    return <Flex h={"100vh"} justify={"center"} align={"center"}>
+      <Loader/>
+    </Flex>;
   }
   return (
     <Routes>
