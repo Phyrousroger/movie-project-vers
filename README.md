@@ -21,11 +21,13 @@ VITE_BASE_URL=https://api.themoviedb.org/3/
 ```
 
 ## used package in this project
-- [zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) for state management
-- [react-query](https://tanstack.com/query/v3/) for data management)
+
+-- [zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) for state management
+-- [react-query](https://tanstack.com/query/v3/) for data management)
 - [mantine](https://mantine.dev/) for ui-component
 
 ## Other third party package
+
 - [react-play](https://reactplay.io/plays) for trailer watch video
 - [react-icons](https://react-icons.github.io/react-icons/) for icon
 - [dayjs](https://day.js.org/docs/en/installation/typescript) for format date
