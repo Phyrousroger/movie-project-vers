@@ -1,18 +1,25 @@
-import {  Container, Flex, Grid, Loader, Pagination, Title } from "@mantine/core";
-import Layout from "../../layout/Layout";
+import {
+  Container,
+  Flex,
+  Grid,
+  Loader,
+  Pagination,
+  Title,
+} from "@mantine/core";
 import { useQuery } from "react-query";
-import fetchDataFromApi from "../../api";
 import { useParams } from "react-router-dom";
-import { movieType } from "../../types/MovieType/movietype";
-import MovieCard from "../../components/MovieCard/MovieCard";
 import { useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
+import { movieType } from "@/types/MovieType/movietype";
+import fetchDataFromApi from "@/api";
+import Layout from "@/layout/Layout";
+import MovieCard from "@/components/MovieCard/MovieCard";
 
 const Search = () => {
   const [page, setPage] = useState<number>(1);
   const { query } = useParams();
-  const isSmallerThanTable=useMediaQuery("(max-width:768px)");
-  const isSmallestTable=useMediaQuery("(max-width:420px)");
+  const isSmallerThanTable = useMediaQuery("(max-width:768px)");
+  const isSmallestTable = useMediaQuery("(max-width:420px)");
   const { data: Searchdata, isLoading } = useQuery<movieType>({
     queryKey: ["search-data", query, page],
     queryFn: () => fetchDataFromApi(`search/multi?query=${query}&page=${page}`),
@@ -37,13 +44,15 @@ const Search = () => {
             <Loader />
           </Flex>
         ) : (
-
-
           <Grid>
             {Searchdata?.results?.map((explore, index) => {
               if (explore.media_type === "person") return;
               return (
-                <Grid.Col key={index} span={isSmallestTable?6:isSmallerThanTable?4:2} my={20}>
+                <Grid.Col
+                  key={index}
+                  span={isSmallestTable ? 6 : isSmallerThanTable ? 4 : 2}
+                  my={20}
+                >
                   <MovieCard
                     explore={explore}
                     mediatype={explore?.media_type}

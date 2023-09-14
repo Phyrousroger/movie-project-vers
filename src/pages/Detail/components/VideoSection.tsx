@@ -1,11 +1,11 @@
 import { Container, Title } from "@mantine/core";
-import { videoresult } from "../../../types/MovieDetail/Credits";
 import { FC, useState } from "react";
 import { Carousel } from "@mantine/carousel";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useMediaQuery } from "@mantine/hooks";
-import VidepPopup from "../../../components/Videotype/VideoPopup";
-import Polygon from "../../../components/Videotype/Polygon";
+import { videoresult } from "@/types/MovieDetail/Credits";
+import Polygon from "@/components/Videotype/Polygon";
+import VidepPopup from "@/components/Videotype/VideoPopup";
 
 interface VideoProps {
   video?: videoresult[];

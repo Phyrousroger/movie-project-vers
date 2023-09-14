@@ -1,5 +1,5 @@
+import { GeneresProps, sortDataType } from "@/types/MovieDetail/Detail";
 import { StylesConfig } from "react-select";
-import { GeneresProps, sortDataType } from "../types/MovieDetail/Detail";
 
 const colourStyles: StylesConfig<GeneresProps> = {
   control: (baseStyle) => ({

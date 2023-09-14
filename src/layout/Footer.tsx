@@ -1,8 +1,8 @@
 import { Container, Center, Flex, Text } from "@mantine/core";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { BsLinkedin } from "react-icons/bs";
-import { useStyle } from "../styles/UseStyles";
 import { useMediaQuery } from "@mantine/hooks";
+import { useStyle } from "@/styles/UseStyles";
 
 interface footerDataProps {
   id: number;

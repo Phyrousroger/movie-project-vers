@@ -9,13 +9,13 @@ import {
 } from "@mantine/core";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useMediaQuery } from "@mantine/hooks";
-import useHomeStore from "../../../store/movieslice";
+import useHomeStore from "@/store/movieslice";
 import { useQuery } from "react-query";
-import { movieType } from "../../../types/MovieType/movietype";
-import fetchDataFromApi from "../../../api";
+import { movieType } from "@/types/MovieType/movietype";
+import fetchDataFromApi from "@/api";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useStyle } from "../../../styles/UseStyles";
+import { useStyle } from "@/styles/UseStyles";
 
 const HeroBanner = () => {
   const { classes } = useStyle();
@@ -64,11 +64,9 @@ const HeroBanner = () => {
           <form className={classes.hersectionForm} onSubmit={searchData}>
             <TextInput
               type="text"
-
-              size={isSmallerThanTable?"md":"xl"}
+              size={isSmallerThanTable ? "md" : "xl"}
               placeholder={"Search for a movie or TV show..."}
               w={"100%"}
-              
               onChange={(e) => setQuery(e.target.value)}
               className="hero-section-form"
             />
@@ -77,7 +75,7 @@ const HeroBanner = () => {
               className="hero-section-button"
               color="dark"
               variant="outline"
-              size={isSmallerThanTable?"md":"xl"}
+              size={isSmallerThanTable ? "md" : "xl"}
             >
               Search
             </Button>

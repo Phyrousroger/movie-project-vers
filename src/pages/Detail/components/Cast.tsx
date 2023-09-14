@@ -1,12 +1,12 @@
-import { CastType } from "../../../types/MovieDetail/Credits";
 import { FC } from "react";
 import { Card, Container, Skeleton, Title, Text } from "@mantine/core";
-import useHomeStore from "../../../store/movieslice";
-import Avator from "../../../assets/avatar.png";
+import Avator from "@/assets/avatar.png";
 import { Carousel } from "@mantine/carousel";
 import { useMediaQuery } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
-import { useStyle } from "../../../styles/UseStyles";
+import { CastType } from "@/types/MovieDetail/Credits";
+import { useStyle } from "@/styles/UseStyles";
+import useHomeStore from "@/store/movieslice";
 
 interface CastProps {
   cast?: CastType[];
@@ -18,7 +18,7 @@ const Cast: FC<CastProps> = ({ cast, loading }) => {
   const url = useHomeStore((state) => state.url);
   const navigate = useNavigate();
   const isSmallerThanTable = useMediaQuery("(max-width:768px)");
-  const isSmallestTable=useMediaQuery("(max-width:420px)")
+  const isSmallestTable = useMediaQuery("(max-width:420px)");
 
   return (
     <Container
@@ -30,13 +30,15 @@ const Cast: FC<CastProps> = ({ cast, loading }) => {
       my={20}
     >
       {cast && cast?.length > 0 && (
-        <Title my={20} size={isSmallerThanTable?16:20}>
+        <Title my={20} size={isSmallerThanTable ? 16 : 20}>
           Top Cast
         </Title>
       )}
       <Carousel
         slidesToScroll={5}
-        slideSize={isSmallestTable?"50%": isSmallerThanTable ? "33.33%" : "20%"}
+        slideSize={
+          isSmallestTable ? "50%" : isSmallerThanTable ? "33.33%" : "20%"
+        }
         slideGap="md"
         withControls={false}
         align="start"
@@ -66,10 +68,15 @@ const Cast: FC<CastProps> = ({ cast, loading }) => {
                 )}
               </Card>
 
-              <Text my={10} size={18} align="center"  fw={700}>
+              <Text my={10} size={18} align="center" fw={700}>
                 {actor.name}
               </Text>
-              <Text align="center" fw={500} opacity={0.7} size={isSmallerThanTable?16:18}>
+              <Text
+                align="center"
+                fw={500}
+                opacity={0.7}
+                size={isSmallerThanTable ? 16 : 18}
+              >
                 {actor.character}
               </Text>
             </Carousel.Slide>

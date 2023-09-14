@@ -8,22 +8,22 @@ import {
   Badge,
   Divider,
 } from "@mantine/core";
-import fetchDataFromApi from "../../../api";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
-import { detailProps } from "../../../types/MovieDetail/Detail";
-import useHomeStore, { genresProps } from "../../../store/movieslice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import PosterFallback from "../../../assets/no-poster.png";
-import CircularProgress from "../../../components/Circular/CircularProgress";
 import PlayBtn from "../../../components/Videotype/PlayBtn";
-import { CrewType, videoresult } from "../../../types/MovieDetail/Credits";
 import { FC } from "react";
-import InfoData from "../../../components/InfoData/InfoData";
 import dayjs from "dayjs";
-import Skelton from "../../../components/Skeleton/Skeleton";
-import { useStyle } from "../../../styles/UseStyles";
+import PosterFallback from "@/assets/no-poster.png";
 import { useMediaQuery } from "@mantine/hooks";
+import fetchDataFromApi from "@/api";
+import { CrewType, videoresult } from "@/types/MovieDetail/Credits";
+import { useStyle } from "@/styles/UseStyles";
+import useHomeStore, { genresProps } from "@/store/movieslice";
+import { detailProps } from "@/types/MovieDetail/Detail";
+import CircularProgress from "@/components/Circular/CircularProgress";
+import InfoData from "@/components/InfoData/InfoData";
+import Skelton from "@/components/Skeleton/Skeleton";
 
 interface StatusType {
   crew?: CrewType[];
@@ -33,8 +33,8 @@ interface StatusType {
 const DetailBanner: FC<StatusType> = ({ crew, video }) => {
   const { classes } = useStyle();
   const { mediatype, id } = useParams();
-  const isSmallerThanTable=useMediaQuery("(max-width:768px)");
-  const isSmallestTable=useMediaQuery("(max-width:420px)");
+  const isSmallerThanTable = useMediaQuery("(max-width:768px)");
+  const isSmallestTable = useMediaQuery("(max-width:420px)");
   const { url } = useHomeStore();
   const director = crew?.filter((f) => f.job === "Director");
   const writer = crew?.filter(
@@ -67,15 +67,12 @@ const DetailBanner: FC<StatusType> = ({ crew, video }) => {
             w={"100%"}
             style={{
               position: "relative",
-              flexFlow:"row wrap",
+              flexFlow: "row wrap",
               zIndex: 10,
             }}
           >
-            <Box 
-            w={isSmallestTable?"100%":"30%"} 
-            mx={"auto"}
-            >
-              <Card  h={500} p={0}>
+            <Box w={isSmallestTable ? "100%" : "30%"} mx={"auto"}>
+              <Card h={500} p={0}>
                 <img
                   width={"100%"}
                   height={"100%"}
@@ -88,12 +85,12 @@ const DetailBanner: FC<StatusType> = ({ crew, video }) => {
                 />
               </Card>
             </Box>
-            <Box w={isSmallestTable?"100%":"65%"}>
+            <Box w={isSmallestTable ? "100%" : "65%"}>
               <Flex direction={"column"} gap={10} pos={"relative"}>
-                <Title color="white" size={isSmallerThanTable?20:25}>
+                <Title color="white" size={isSmallerThanTable ? 20 : 25}>
                   {movieDetail?.title || movieDetail?.name}
                 </Title>
-                <Text fw={700} mt={10} size={isSmallerThanTable?18:20}>
+                <Text fw={700} mt={10} size={isSmallerThanTable ? 18 : 20}>
                   {movieDetail?.tagline}
                 </Text>
                 <Flex gap={5}>
@@ -119,8 +116,12 @@ const DetailBanner: FC<StatusType> = ({ crew, video }) => {
                   </Box>
                   <PlayBtn video={video} />
                 </Flex>
-                <Title size={isSmallerThanTable?20:25}>OverView</Title>
-                <Text size={isSmallerThanTable?16:18} fw={500} color="white">
+                <Title size={isSmallerThanTable ? 20 : 25}>OverView</Title>
+                <Text
+                  size={isSmallerThanTable ? 16 : 18}
+                  fw={500}
+                  color="white"
+                >
                   {movieDetail?.overview}
                 </Text>
                 <Box mb={20}>

@@ -1,10 +1,10 @@
 import { Box, Container, Flex, SegmentedControl, Title } from "@mantine/core";
 import { useQuery } from "react-query";
-import { movieType } from "../../../types/MovieType/movietype";
+import { movieType } from "@/types/MovieType/movietype";
 import { useState } from "react";
-import CarouselComponent from "../../../components/carousel/Carousel";
-import fetchDataFromApi from "../../../api";
-import { useSegements } from "../../../styles/UseSegment";
+import CarouselComponent from "@/components/carousel/Carousel";
+import fetchDataFromApi from "@/api";
+import { useSegements } from "@/styles/UseSegment";
 import { useMediaQuery } from "@mantine/hooks";
 const Popular = () => {
   const [endpoint, setEndpoint] = useState("tv");
@@ -34,12 +34,12 @@ const Popular = () => {
     >
       <Container mt={50} size={"lg"}>
         <Flex justify={"space-between"} align={"center"}>
-          <Title fw={500} size={isSmallerThanTable?18:20}>
+          <Title fw={500} size={isSmallerThanTable ? 18 : 20}>
             Popular
           </Title>
           <SegmentedControl
             radius="xl"
-            size={ "sm"}
+            size={"sm"}
             data={["TV", "MOVIE"]}
             classNames={classes}
             onChange={onTabChange}

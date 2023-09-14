@@ -7,13 +7,13 @@ import {
   Text,
   Divider,
 } from "@mantine/core";
-import PosterFallBack from "../../../assets/no-poster.png";
-import useHomeStore from "../../../store/movieslice";
-import { CastBio } from "../../../types/CastType/CastBio";
+import PosterFallBack from "@/assets/no-poster.png";
+import useHomeStore from "@/store/movieslice";
+import { CastBio } from "@/types/CastType/CastBio";
 import { FC, useState } from "react";
-import InfoData from "../../../components/InfoData/InfoData";
+import InfoData from "@/components/InfoData/InfoData";
 import dayjs from "dayjs";
-import Skelton from "../../../components/Skeleton/Skeleton";
+import Skelton from "@/components/Skeleton/Skeleton";
 import { useMediaQuery } from "@mantine/hooks";
 
 interface CastBioProps {
@@ -24,29 +24,24 @@ interface CastBioProps {
 const CastDetailbanner: FC<CastBioProps> = ({ castBio, loading }) => {
   const { url } = useHomeStore();
   const [fullBiography, setFullBiography] = useState<boolean>(false);
-  const isSmallerThanTable=useMediaQuery("(max-width:768px)")
-  const isSmallestTable=useMediaQuery("(max-width:420px)");
+  const isSmallerThanTable = useMediaQuery("(max-width:768px)");
+  const isSmallestTable = useMediaQuery("(max-width:420px)");
 
   return (
     <Container my={30} size={"lg"}>
       {!loading ? (
         <Flex
           gap={20}
-        justify={"start"}
+          justify={"start"}
           w={"100%"}
           style={{
             position: "relative",
-            flexFlow:isSmallestTable? "row wrap":"nowrap",
+            flexFlow: isSmallestTable ? "row wrap" : "nowrap",
             zIndex: 10,
           }}
         >
-          <Box 
-           mx={"auto"}
-           >
-            <Card
-              p={0}
-             h={400}
-            >
+          <Box mx={"auto"}>
+            <Card p={0} h={400}>
               <img
                 width={"100%"}
                 height={"100%"}
@@ -59,7 +54,7 @@ const CastDetailbanner: FC<CastBioProps> = ({ castBio, loading }) => {
               />
             </Card>
           </Box>
-          <Box w={isSmallestTable?"100%":"70%"}>
+          <Box w={isSmallestTable ? "100%" : "70%"}>
             <Flex
               direction={"column"}
               gap={10}
@@ -67,8 +62,10 @@ const CastDetailbanner: FC<CastBioProps> = ({ castBio, loading }) => {
                 position: "relative",
               }}
             >
-              <Title color="white" size={isSmallerThanTable?20: 25}>{castBio?.name}</Title>
-              <Title mt={20} size={isSmallerThanTable?20:25}>
+              <Title color="white" size={isSmallerThanTable ? 20 : 25}>
+                {castBio?.name}
+              </Title>
+              <Title mt={20} size={isSmallerThanTable ? 20 : 25}>
                 BioGraphy
               </Title>
               <Text fw={500} size={18} color="white">

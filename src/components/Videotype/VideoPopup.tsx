@@ -1,8 +1,7 @@
-// import { useStyle } from "@/styles/UseStyles";
+import { useStyle } from "@/styles/UseStyles";
 import { Flex, Card, CloseButton } from "@mantine/core";
 import { Dispatch, FC, SetStateAction } from "react";
 import ReactPlayer from "react-player";
-import { useStyle } from "../../styles/UseStyles";
 
 interface VideoPopupProps {
   show: boolean;

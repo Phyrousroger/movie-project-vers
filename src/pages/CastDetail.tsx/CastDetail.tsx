@@ -1,12 +1,12 @@
 import { useQuery } from "react-query";
-import Layout from "../../layout/Layout";
+import Layout from "@/layout/Layout";
 import CastDetailbanner from "./components/CastDetailbanner";
-import fetchDataFromApi from "../../api";
+import fetchDataFromApi from "@/api";
 import { useParams } from "react-router-dom";
-import { CastBio } from "../../types/CastType/CastBio";
+import { CastBio } from "@/types/CastType/CastBio";
 import { Container } from "@mantine/core";
-import CarouselComponent from "../../components/carousel/Carousel";
-import { CastMovieType } from "../../types/CastType/Cast";
+import CarouselComponent from "@/components/carousel/Carousel";
+import { CastMovieType } from "@/types/CastType/Cast";
 
 const CastDetail = () => {
   const { castId } = useParams();

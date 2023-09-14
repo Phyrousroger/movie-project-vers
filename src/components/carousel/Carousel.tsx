@@ -5,10 +5,10 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
-import MovieCard from "../MovieCard/MovieCard";
-import { resultType } from "../../types/MovieType/movietype";
-import { useStyle } from "../../styles/UseStyles";
 import { useMediaQuery } from "@mantine/hooks";
+import { resultType } from "@/types/MovieType/movietype";
+import { useStyle } from "@/styles/UseStyles";
+import MovieCard from "../MovieCard/MovieCard";
 
 interface CarouselProps {
   title?: string;
@@ -24,46 +24,23 @@ const CarouselComponent: React.FC<CarouselProps> = ({
   endpoint,
 }) => {
   const isSmallerThanTable = useMediaQuery("(max-width:768px)");
-  const isSmallestTable=useMediaQuery("(max-width:420px)")
+  const isSmallestTable = useMediaQuery("(max-width:420px)");
   const { classes } = useStyle();
 
   const hasData = data && data !== undefined && data?.length > 0;
-  if (loading) {
-    return (
-      <Carousel
-        my={20}
-        slideSize={isSmallestTable ? "50%":isSmallerThanTable?"33.33%": "20%"}
-        slideGap={"lg"}
-        loop
-        align="start"
-        classNames={classes}
-        slidesToScroll={2}
-        nextControlIcon={<BsFillArrowRightCircleFill size={30} color="#000" />}
-        previousControlIcon={
-          <BsFillArrowLeftCircleFill size={30} color="#000" />
-        }
-      >
-        {[1, 2, 3, 4, 5]?.map((trend) => (
-          <Carousel.Slide key={trend}>
-            <Skeleton h={300} w={"100%"} className={classes.sketon} />
-            <Skeleton mt={20} h={20} w={"90%"} className={classes.sketon} />
-            <Skeleton mt={20} h={20} w={"50%"} className={classes.sketon} />
-          </Carousel.Slide>
-        ))}
-      </Carousel>
-    );
-  }
 
   if (hasData)
     return (
       <>
-        <Title fw={500} size={isSmallerThanTable?18:20}>
+        <Title fw={500} size={isSmallerThanTable ? 18 : 20}>
           {title}
         </Title>
         <Carousel
           my={20}
-          slideSize={isSmallestTable ? "50%":isSmallerThanTable?"33.33%": "20%"}
-          slideGap={isSmallerThanTable?"md":"lg"}
+          slideSize={
+            isSmallestTable ? "50%" : isSmallerThanTable ? "33.33%" : "20%"
+          }
+          slideGap={isSmallerThanTable ? "md" : "lg"}
           loop
           align="start"
           withControls={data?.length > 5 && !isSmallerThanTable ? true : false}
@@ -76,18 +53,36 @@ const CarouselComponent: React.FC<CarouselProps> = ({
             <BsFillArrowLeftCircleFill size={30} color="#000" />
           }
         >
-          {data?.map((trend) => {
-            if (trend.id) {
-              return (
-                <Carousel.Slide key={trend.id}>
-                  <MovieCard
-                    explore={trend}
-                    mediatype={trend.media_type || endpoint}
+          {loading
+            ? [1, 2, 3, 4, 5]?.map((trend) => (
+                <Carousel.Slide key={trend}>
+                  <Skeleton h={300} w={"100%"} className={classes.sketon} />
+                  <Skeleton
+                    mt={20}
+                    h={20}
+                    w={"90%"}
+                    className={classes.sketon}
+                  />
+                  <Skeleton
+                    mt={20}
+                    h={20}
+                    w={"50%"}
+                    className={classes.sketon}
                   />
                 </Carousel.Slide>
-              );
-            }
-          })}
+              ))
+            : data?.map((trend) => {
+                if (trend.id) {
+                  return (
+                    <Carousel.Slide key={trend.id}>
+                      <MovieCard
+                        explore={trend}
+                        mediatype={trend.media_type || endpoint}
+                      />
+                    </Carousel.Slide>
+                  );
+                }
+              })}
         </Carousel>
       </>
     );

@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom";
-import Layout from "../../layout/Layout";
 import DetailBanner from "./components/DetailBanner";
-import fetchDataFromApi from "../../api";
 import { useQuery } from "react-query";
-import { CreditType, videoType } from "../../types/MovieDetail/Credits";
 import Cast from "./components/Cast";
 import VideoSection from "./components/VideoSection";
-import { useStyle } from "../../styles/UseStyles";
-import CarouselComponent from "../../components/carousel/Carousel";
 import { Container } from "@mantine/core";
-import { movieType } from "../../types/MovieType/movietype";
+import fetchDataFromApi from "@/api";
+import { CreditType, videoType } from "@/types/MovieDetail/Credits";
+import { useStyle } from "@/styles/UseStyles";
+import { movieType } from "@/types/MovieType/movietype";
+import Layout from "@/layout/Layout";
+import CarouselComponent from "@/components/carousel/Carousel";
 
 const Detail = () => {
   const { classes } = useStyle();

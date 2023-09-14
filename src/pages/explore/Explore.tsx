@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import Layout from "../../layout/Layout";
 import {
   Group,
   Flex,
@@ -11,18 +10,19 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import fetchDataFromApi from "../../api";
+import Select, { ActionMeta, MultiValue, SingleValue } from "react-select";
+import makeAnimated from "react-select/animated";
+import { useMediaQuery } from "@mantine/hooks";
 import {
   GeneresProps,
   GenreTypeProps,
   sortDataType,
-} from "../../types/MovieDetail/Detail";
-import { movieType } from "../../types/MovieType/movietype";
-import Select, { ActionMeta, MultiValue, SingleValue } from "react-select";
-import MovieCard from "../../components/MovieCard/MovieCard";
-import makeAnimated from "react-select/animated";
-import { colourStyles, colourStyles2 } from "../../styles/UseSelectOption";
-import { useMediaQuery } from "@mantine/hooks";
+} from "@/types/MovieDetail/Detail";
+import fetchDataFromApi from "@/api";
+import { movieType } from "@/types/MovieType/movietype";
+import Layout from "@/layout/Layout";
+import { colourStyles, colourStyles2 } from "@/styles/UseSelectOption";
+import MovieCard from "@/components/MovieCard/MovieCard";
 
 const animatedComponents = makeAnimated();
 
@@ -41,8 +41,8 @@ const sortbyData = [
 
 const Explore = () => {
   const { mediatype } = useParams();
-  const isSmallerThanTable=useMediaQuery("(max-width:768px)")
-  const isSmallestTable=useMediaQuery("(max-width:420px)");
+  const isSmallerThanTable = useMediaQuery("(max-width:768px)");
+  const isSmallestTable = useMediaQuery("(max-width:420px)");
   //chage-data
   const [genre, setGenre] = useState<number[]>();
   const [page, setPage] = useState<number>(1);
@@ -98,12 +98,12 @@ const Explore = () => {
     <Layout>
       <Container size={"lg"}>
         <Flex
-         justify={"space-between"} 
+          justify={"space-between"}
           style={{
-            flexFlow:"row wrap"
-
+            flexFlow: "row wrap",
           }}
-        my={20}>
+          my={20}
+        >
           <Title size={20} my={20} align="center">
             {mediatype === "tv" ? "Explore TV Shows" : "Explore Movies"}
           </Title>
@@ -143,14 +143,17 @@ const Explore = () => {
             <Loader />
           </Flex>
         ) : (
-        
-          <Grid >
+          <Grid>
             {ExploreData?.results?.map((explore, index) => (
-              <Grid.Col key={index} span={isSmallestTable?6:isSmallerThanTable?4:2} my={20}>
+              <Grid.Col
+                key={index}
+                span={isSmallestTable ? 6 : isSmallerThanTable ? 4 : 2}
+                my={20}
+              >
                 <MovieCard explore={explore} mediatype={mediatype} />
               </Grid.Col>
             ))}
-            </Grid>
+          </Grid>
         )}
 
         <Flex justify="end" my={20}>

@@ -1,10 +1,10 @@
 import { Box, Container, Flex, SegmentedControl, Title } from "@mantine/core";
 import { useQuery } from "react-query";
 import { useState } from "react";
-import fetchDataFromApi from "../../../api";
-import { movieType } from "../../../types/MovieType/movietype";
-import CarouselComponent from "../../../components/carousel/Carousel";
-import { useSegements } from "../../../styles/UseSegment";
+import fetchDataFromApi from "@/api";
+import { movieType } from "@/types/MovieType/movietype";
+import CarouselComponent from "@/components/carousel/Carousel";
+import { useSegements } from "@/styles/UseSegment";
 import { useMediaQuery } from "@mantine/hooks";
 
 const Toprated = () => {
@@ -37,7 +37,7 @@ const Toprated = () => {
     >
       <Container mt={50} size={"lg"}>
         <Flex justify={"space-between"} align={"center"}>
-          <Title fw={500} size={isSmallerThanTable?18:20}>
+          <Title fw={500} size={isSmallerThanTable ? 18 : 20}>
             Top-Rated
           </Title>
           <SegmentedControl

@@ -7,8 +7,7 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import logo from "../assets/movix-logo.svg";
-
+import logo from "@/assets/movix-logo.svg";
 import { useState, useCallback, useEffect } from "react";
 import { useMediaQuery, useDisclosure } from "@mantine/hooks";
 import { FiSearch } from "react-icons/fi";

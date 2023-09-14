@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/Dashboard/Dashboard";
 import { useQuery } from "react-query";
+import { Flex, Loader } from "@mantine/core";
 import { configuretype } from "./types/Configure/configuration";
-import { Flex, Loader, Text } from "@mantine/core";
 import useHomeStore from "./store/movieslice";
 import fetchDataFromApi from "./api";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import Detail from "./pages/Detail/Detail";
-import Explore from "./pages/explore/Explore";
 import Search from "./pages/Search/Search";
 import CastDetail from "./pages/CastDetail.tsx/CastDetail";
+import Explore from "./pages/explore/Explore";
 
 export default function App() {
   const setApiConfiguration = useHomeStore(
@@ -29,9 +29,11 @@ export default function App() {
   });
 
   if (isFetching) {
-    return <Flex h={"100vh"} justify={"center"} align={"center"}>
-      <Loader/>
-    </Flex>;
+    return (
+      <Flex h={"100vh"} justify={"center"} align={"center"}>
+        <Loader />
+      </Flex>
+    );
   }
   return (
     <Routes>

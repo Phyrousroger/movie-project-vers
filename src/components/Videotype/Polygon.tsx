@@ -1,8 +1,5 @@
-// import { usePolygon } from "@/styles/UsePolygon";
+import { usePolygon } from "@/styles/UsePolygon";
 
-// import { usePolygon } from "@/styles/UsePolygon";
-// import { usePolygon } from "@/styles/UsePolygon";
-import { usePolygon } from "../../styles/UsePolygon";
 
 const Polygon = () => {
   const { classes } = usePolygon();
